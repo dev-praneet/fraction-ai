@@ -1,0 +1,16 @@
+.ensuring-data-header {
+  color: var(--Greyscale-100, #fff);
+  font-family: 'PolySans Bulky Wide', sans-serif;
+  font-size: 2.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.ensuring-data-subheader {
+  color: var(--Greyscale-100, #fff);
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2rem;
+}

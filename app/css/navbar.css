@@ -1,0 +1,131 @@
+.bg-purple-50 {
+  background: rgba(35, 1, 75, 0.4) !important;
+}
+.collapse-title-custom {
+  padding-right: 2rem !important;
+  border-bottom: none !important;
+}
+.text-small3 {
+  color: var(--Purple-200, #fceeff);
+  font-size: 1.0625rem;
+  /* font-family:  'Inter'; */
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.text-login {
+  color: var(--Greyscale-100, #fff);
+  font-size: 1.125rem;
+  /* font-family:  'Inter'; */
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+@media (min-width: 1200px) {
+  .menu-hamburger {
+    display: none;
+  }
+  .navbar-visiblity {
+    display: flex;
+  }
+  .mobile-hamburger {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .menu-hamburger {
+    display: none;
+  }
+  .navbar-visiblity {
+    display: flex;
+  }
+  .mobile-hamburger {
+    display: none;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .menu-hamburger {
+    display: block;
+  }
+  .navbar-visiblity {
+    display: none;
+  }
+  .mobile-hamburger {
+    display: blocks;
+  }
+  .navbar-start {
+    width: 22%;
+    justify-content: flex-start;
+  }
+  .navbar-end {
+    width: 70%;
+    justify-content: flex-end;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .menu-hamburger {
+    display: block;
+  }
+  .navbar-visiblity {
+    display: none;
+  }
+  .mobile-hamburger {
+    display: blocks;
+  }
+  .navbar-start-mobile {
+    width: 26% !important;
+  }
+
+  .navbar-end-mobile {
+    width: 60% !important;
+    color: white;
+  }
+  .text-small3 {
+    font-size: 14px;
+    /* font-family:  'Inter'; */
+  }
+}
+@media (min-width: 479px) and (max-width: 576px) {
+  .menu-hamburger {
+    display: block;
+  }
+  .navbar-visiblity {
+    display: none;
+  }
+  .mobile-hamburger {
+    display: blocks;
+  }
+  .navbar-start-mobile {
+    width: 40% !important;
+  }
+
+  .navbar-end-mobile {
+    width: 38% !important;
+    color: white;
+  }
+  .text-small3 {
+    font-size: 14px;
+    /* font-family:  'Inter'; */
+  }
+}
+@media (max-width: 479px) {
+  .menu-hamburger {
+    display: block;
+  }
+  .navbar-visiblity {
+    display: none;
+  }
+  .mobile-hamburger {
+    display: blocks;
+  }
+  .navbar-start-mobile {
+    width: 45% !important;
+  }
+
+  .navbar-end-mobile {
+    width: 40% !important;
+    color: white;
+  }
+}

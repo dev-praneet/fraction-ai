@@ -1,0 +1,8 @@
+.investor-logo-carousel {
+  height: 19.5625rem;
+  padding-top: 3.0625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}

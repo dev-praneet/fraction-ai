@@ -1,0 +1,330 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  font-size: 1vw;
+}
+/* PolySans Bulky Wide */
+@font-face {
+  font-family: 'PolySans Bulky Wide';
+  src: url('../public/fonts/PolySans-BulkyWide.otf') format('opentype');
+}
+
+/* PolySans Bulky Wide Italic */
+@font-face {
+  font-family: 'PolySans Bulky Wide Italic';
+  src: url('../public/fonts/PolySans-BulkyWideItalic.otf') format('opentype');
+  font-style: italic;
+}
+
+/* PolySans Median Wide */
+@font-face {
+  font-family: 'PolySans Median Wide';
+  src: url('../public/fonts/PolySans-MedianWide.otf') format('opentype');
+}
+
+/* PolySans Median Wide Italic */
+@font-face {
+  font-family: 'PolySans Median Wide Italic';
+  src: url('../public/fonts/PolySans-MedianWideItalic.otf') format('opentype');
+  font-style: italic;
+}
+
+/* PolySans Neutral Wide */
+@font-face {
+  font-family: 'PolySans Neutral Wide';
+  src: url('../public/fonts/PolySans-NeutralWide.otf') format('opentype');
+}
+
+/* PolySans Neutral Wide Italic */
+@font-face {
+  font-family: 'PolySans Neutral Wide Italic';
+  src: url('../public/fonts/PolySans-NeutralWideItalic.otf') format('opentype');
+  font-style: italic;
+}
+
+/* PolySans Slim Wide */
+@font-face {
+  font-family: 'PolySans Slim Wide';
+  src: url('../public/fonts/PolySans-SlimWide.otf') format('opentype');
+}
+
+/* PolySans Slim Wide Italic */
+@font-face {
+  font-family: 'PolySans Slim Wide Italic';
+  src: url('../public/fonts/PolySans-SlimWideItalic.otf') format('opentype');
+  font-style: italic;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.global-bg {
+  background: url('../public/icons/DesktopBg.svg') !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+.global-custom-border {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+/* Global Font Classes */
+
+/* Light */
+.font-light-12 {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 24px;
+}
+
+/* Regular */
+.font-regular-12 {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+/* Medium */
+.font-medium-12 {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+/* Semibold */
+.font-semibold-14 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+/* Bold */
+.font-bold-14 {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 14px;
+}
+
+/* Regular */
+.font-regular-16 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+/* Regular */
+.font-regular-17 {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 17px;
+}
+
+/* Regular */
+.font-regular-18 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+/* Bold */
+.font-bold-18 {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 18px;
+}
+
+/* Light */
+.font-light-20 {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 22px;
+}
+
+/* Regular */
+.font-regular-24 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 30px;
+}
+
+/* Bold */
+.font-bold-24 {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 32px;
+}
+
+/* Bulky Wide */
+.font-bulky-wide-16 {
+  font-family: 'PolySans Bulky Wide';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+/* Bulky Wide */
+.font-bulky-wide-18 {
+  font-family: 'PolySans Bulky Wide';
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 46px;
+}
+
+/* Bulky Wide */
+.font-bulky-wide-22 {
+  font-family: 'PolySans Bulky Wide';
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 44px;
+}
+
+/* Bulky Wide */
+.font-bulky-wide-28 {
+  font-family: 'PolySans Bulky Wide';
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+/* Bulky Wide */
+.font-bulky-wide-32 {
+  font-family: 'PolySans Bulky Wide';
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+/* Bulky Wide */
+.font-bulky-wide-46 {
+  font-family: 'PolySans Bulky Wide';
+  font-size: 46px;
+  font-weight: 400;
+  line-height: 46px;
+}
+
+/* Bulky Wide */
+.font-bulky-wide-72 {
+  font-family: 'PolySans Bulky Wide';
+  font-size: 72px;
+  font-weight: 400;
+  line-height: 52px;
+}
+
+/* Bulky Wide */
+.font-bulky-wide-58 {
+  font-family: 'PolySans Bulky Wide';
+  font-size: 58px;
+  font-weight: 400;
+  line-height: 58px;
+}
+
+@media (min-width: 767px) and (max-width: 991px) {
+  .global-bg {
+    background: url('../public/icons/TabletBg.svg');
+    --bg-size: cover !important;
+    --bg-repeat: no-repeat;
+    background-size: var(--bg-size) !important;
+    background-repeat: var(--bg-repeat) !important;
+  }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .global-bg {
+    background: url('../public/icons/MobileBg.svg');
+    --bg-size: cover !important;
+    --bg-repeat: no-repeat;
+    background-size: var(--bg-size) !important;
+    background-repeat: var(--bg-repeat) !important;
+  }
+}
+
+.home-page {
+  width: 100%;
+  max-width: 150rem;
+}
+
+.bg-img {
+  width: 100%;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  position: relative;
+}
+
+.section-1 {
+  background: url('../public/images/1.png');
+  padding-top: 139%;
+}
+
+.section-2 {
+  background: url('../public/images/2.png');
+  padding-top: 22.5625rem;
+}
+
+.section-3 {
+  background: url('../public/images/3.png');
+  padding-top: 192.5625rem;
+}
+
+.section-4 {
+  background: url('../public/images/4.png');
+  padding-top: 51.875rem;
+}
+
+.section-5 {
+  background: url('../public/images/5.png');
+  padding-top: 52.8125rem;
+}
+
+.section-6 {
+  background: url('../public/images/6.png');
+  padding-top: 57.4375rem;
+}
+
+.section-7 {
+  background: url('../public/images/7.png');
+  padding-top: 39.6875rem;
+}
+
+.section-8 {
+  background: url('../public/images/8.png');
+  padding-top: 77.25rem;
+}
+
+.section-9 {
+  background: url('../public/images/9.png');
+  padding-top: 52.6875rem;
+}
+
+.component-div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.mobile-background {
+  width: 100rem;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background: url('../public/icons/MobileBackground.svg'), #080808;
+}

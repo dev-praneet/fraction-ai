@@ -1,0 +1,24 @@
+.footer-company-address {
+  color: var(--Greyscale-500, #7e8390);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.footer-content-header {
+  color: var(--Greyscale-100, #fff);
+  font-family: 'PolySans Bulky Wide', sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1rem;
+}
+
+.footer-content {
+  color: var(--Greyscale-500, #7e8390);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
