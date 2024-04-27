@@ -197,7 +197,55 @@
   align-items: center;
 }
 
+@keyframes text-animation {
+    0% {
+        transform: translateY(150px) scaleY(1.5);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px) scaleY(1);
+        opacity: 1;
+    }
+}
 
+.animate-text {
+    animation-name: text-animation;
+    animation-duration: 400ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes circle-animation {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animate-circle {
+    animation-name: circle-animation;
+    animation-duration: 400ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes image-animation {
+    0% {
+        transform: translateY(150px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.animate-image {
+    animation-name: image-animation;
+    animation-duration: 400ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
 
 
 @media(min-width:1550px)  {

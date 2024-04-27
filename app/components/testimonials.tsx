@@ -12,6 +12,7 @@ import BlockQuote from '../../public/icons/BlockQuote.svg';
 
 import '../css/testimonial.css';
 import { useRef, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Testimonials() {
   const sliderRef = useRef<Slider>(null);
@@ -48,16 +49,39 @@ export default function Testimonials() {
     },
   ];
 
+  const textRef = useRef(null);
+  const sliderWrapperRef = useRef(null);
+
+  const { scrollYProgress: textScrollYProgress } = useScroll({
+    target: textRef,
+  });
+
+  const { scrollYProgress: sliderScrollYProgress } = useScroll({
+    target: sliderWrapperRef,
+  });
+
+  const textScaleY = useTransform(textScrollYProgress, [0.4, 1], [1, 1.2]);
+  const textOpacity = useTransform(textScrollYProgress, [0.2, 1], [1, 0]);
+  const textTranslateY = useTransform(textScrollYProgress, [0.3, 1], [0, 200]);
+
+  const sliderScaleY = useTransform(sliderScrollYProgress, [0.4, 1], [1, 1.2]);
+  const sliderOpacity = useTransform(sliderScrollYProgress, [0.4, 1], [1, 0]);
+  const sliderTranslateY = useTransform(sliderScrollYProgress, [0.4, 1], [0, 200]);
+
   const handleAfterChange = (currentSlide: number) => {
     setCurrentSlide(currentSlide);
   };
 
   return (
-    <div className="relative">
+    <div className="relative snap-start scroll-mt-28">
       <figure className="absolute top-[-4.25rem] left-0 z-0">
         <img src={TestimonialsBackground.src} className="w-full h-[59rem]" />
       </figure>
-      <div className="relative flex justify-between items-center px-[27.75rem] z-10">
+      <motion.div
+        ref={textRef}
+        className="relative flex justify-between items-center px-[27.75rem] z-10"
+        style={{ y: textTranslateY, opacity: textOpacity, scaleY: textScaleY }}
+      >
         <figure className="" onClick={() => sliderRef.current?.slickPrev()}>
           <img alt="" loading="lazy" className="w-[3.25rem] h-[3.25rem]" decoding="async" src={LeftArrowIcon.src} />
         </figure>
@@ -69,9 +93,13 @@ export default function Testimonials() {
         <figure className="" onClick={() => sliderRef.current?.slickNext()}>
           <img alt="" loading="lazy" className="w-[3.25rem] h-[3.25rem]" decoding="async" src={RightArrowIcon.src} />
         </figure>
-      </div>
+      </motion.div>
 
-      <div className="relative pt-[5.875rem] px-[6rem]">
+      <motion.div
+        ref={sliderWrapperRef}
+        className="relative pt-[5.875rem] px-[6rem]"
+        style={{ y: sliderTranslateY, opacity: sliderOpacity, scaleY: sliderScaleY }}
+      >
         <Slider
           {...settings}
           className=""
@@ -84,7 +112,7 @@ export default function Testimonials() {
             </div>
           ))}
         </Slider>
-      </div>
+      </motion.div>
     </div>
   );
 }

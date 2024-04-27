@@ -79,6 +79,11 @@ export default function Home() {
             <Footer />
           </div>
         </div>
+
+        {/* <div className="section-scroll"></div>
+        <div className="section-scroll"></div>
+        <div className="section-scroll"></div>
+        <div className="section-scroll"></div> */}
       </div>
 
       <div className="block md:hidden home-page-mobile bg-[#080808] mobile-background">

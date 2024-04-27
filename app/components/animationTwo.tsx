@@ -4,10 +4,20 @@ import animationData from '../../public/videos/AnimationThree.json';
 import Content from '../../public/icons/Content.svg';
 import '../css/animationtwo.css';
 import '../css/animationone.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const AnimationTwo = () => {
   const [renderComplete, setRenderComplete] = useState<boolean>(false);
+
+  const textWrapperRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: textWrapperRef,
+  });
+
+  const scaleY = useTransform(scrollYProgress, [0.4, 1], [1, 1.2]);
+  const opacity = useTransform(scrollYProgress, [0.2, 1], [1, 0]);
+  const translateY = useTransform(scrollYProgress, [0.3, 1], [0, 200]);
 
   useEffect(() => {
     if (renderComplete) {
@@ -40,14 +50,18 @@ const AnimationTwo = () => {
 
   return (
     <div className="pt-[13.75rem] relative">
-      <div className="flex justify-between items-center pt-[1.3125rem] pl-[11.375rem] pr-[9.25rem]">
+      <motion.div
+        ref={textWrapperRef}
+        className="flex justify-between items-center pt-[1.3125rem] pl-[11.375rem] pr-[9.25rem] snap-start scroll-mt-20"
+        style={{ y: translateY, opacity }}
+      >
         <div className="">
           <div className="ensuring-data-header">Ensuring Data Quality</div>
         </div>
         <div className="">
           <div className="ensuring-data-subheader">On Chain Reputation System</div>
         </div>
-      </div>
+      </motion.div>
 
       <div className="flex relative">
         <div className="flex justify-center">

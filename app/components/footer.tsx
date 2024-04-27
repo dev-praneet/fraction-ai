@@ -4,11 +4,16 @@ import TwitterIcon from '../../public/icons/TwitterIcon.svg';
 import LinkednIcon from '../../public/icons/LinkednIcon.svg';
 import FooterBackground from '../../public/icons/FooterBackground.svg';
 import '../css/footer.css';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Footer() {
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: targetRef, offset: ['end end', 'start end'] });
+
   return (
     <>
-      <div className="">
+      <div>
         <div className="">
           <figure className="absolute bottom-[0] right-[0] z-0">
             <img src={FooterBackground.src} className="w-[100rem] h-[34.375rem]" />
@@ -24,8 +29,8 @@ export default function Footer() {
           </figure>
         </div>
 
-        <div className="absolute bottom-[0] left-[0]">
-          <div className="h-[15.75rem] w-full mb-[2.8125rem] pt-[2.8125rem] pl-[3.75rem] flex">
+        <motion.div className="absolute bottom-[0] left-[0]" ref={targetRef}>
+          <div className="h-[15.75rem] w-full mb-[2.8125rem] pt-[2.8125rem] pl-[3.75rem] flex snap-end">
             <div className="">
               <div>
                 <div className="">
@@ -72,7 +77,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </>
   );

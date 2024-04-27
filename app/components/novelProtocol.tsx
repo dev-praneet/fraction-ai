@@ -1,3 +1,5 @@
+'use client';
+
 import Cube from '../../public/icons/Cube.svg';
 import Cylinder from '../../public/icons/Cylinder.svg';
 import Pyramid from '../../public/icons/Pyramid.svg';
@@ -5,8 +7,30 @@ import ParticipateButton from '../../public/icons/PartcipateButton.svg';
 import FracIcon from '../../public/icons/FracIcon.svg';
 import ParticipateBackground from '../../public/icons/ParticipateBackground.svg';
 import '../css/novelprotocol.css';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function NovelProtocol() {
+  const figureRef = useRef(null);
+  const textRef = useRef(null);
+
+  const { scrollYProgress: figureScrollYProgress } = useScroll({
+    target: figureRef,
+    offset: ['start start', 'start end'],
+  });
+  const { scrollYProgress: textScrollYProgress } = useScroll({
+    target: textRef,
+    offset: ['start start', 'end end'],
+  });
+
+  const figureScaleY = useTransform(figureScrollYProgress, [0.2, 1], [1, 2]);
+  //   const figureOpacity = useTransform(figureScrollYProgress, [0.4, 1], [1, 0]);
+  const figureTranslateY = useTransform(figureScrollYProgress, [0.2, 1], [0, 250]);
+
+  //   const textScaleY = useTransform(textScrollYProgress, [0.5, 1], [1, 1.2]);
+  const textOpacity = useTransform(textScrollYProgress, [0.3, 0.7], [1, 0]);
+  const textTranslateY = useTransform(textScrollYProgress, [0.3, 0.7], [0, 50]);
+
   return (
     // <div className="protocol-content protocol-main-conatiner relative novel-protocol-screen-padding">
     //   <div className="relative z-10 flex flex-col rounded-full novel-protocol-video-content">
@@ -22,7 +46,7 @@ export default function NovelProtocol() {
     //       <source src="videos/BlackHole.mp4" type="video/mp4" />
     //     </video>
     //     </div>
-        
+
     //     <div className=" novel-protocol-header  relative" style={{ zIndex: '10' }}>
     //       <div className="novel-protocol-header-text md:pb-0">
     //         <span>Made Possible by our </span>
@@ -34,7 +58,7 @@ export default function NovelProtocol() {
     //         <figure className="relative novel-animation-cube block flex justify-center">
     //           <img
     //             alt=""
-            
+
     //             loading="lazy"
     //             decoding="async"
     //             className="novel-animation-img-cube"
@@ -107,41 +131,38 @@ export default function NovelProtocol() {
 
     //       </div>
     //     </div>{' '}
-        
+
     //        </div>
     // </div>
-    <div className='relative mt-[13.75rem] h-[58.5rem]'>
-      <figure className='absolute top-0 left-0 z-10'>
-          <img src={ParticipateBackground.src} className="w-[100rem] h-[58.5rem]"/>
+    <div className="relative mt-[13.75rem] h-[58.5rem] snap-start">
+      <figure className="absolute top-0 left-0 z-10">
+        <motion.img
+          src={ParticipateBackground.src}
+          className="w-[100rem] h-[58.5rem]"
+          ref={figureRef}
+          style={{ y: figureTranslateY, scaleY: figureScaleY, transformOrigin: 'center top' }}
+        />
       </figure>
 
       <div className="absolute w-full flex justify-center z-20 mt-[7.3125rem]">
-        <div>
-          <span className='novel-protocol-header'>Made Possible by our </span>
-          <span className='novel-protocol-header'> Novel Protocol</span>
-        </div>
+        <motion.div ref={textRef} style={{ y: textTranslateY, opacity: textOpacity }}>
+          <span className="novel-protocol-header">Made Possible by our </span>
+          <span className="novel-protocol-header"> Novel Protocol</span>
+        </motion.div>
       </div>
 
-      <div className='flex justify-center'>
-        <div className='novel-protocol-video w-[60rem] h-[45rem]'>
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            disableRemotePlayback
-            className="video-black-hole"
-          >
+      <div className="flex justify-center">
+        <div className="novel-protocol-video w-[60rem] h-[45rem]">
+          <video autoPlay loop muted playsInline disableRemotePlayback className="video-black-hole">
             <source src="videos/BlackHole.mp4" type="video/mp4" />
           </video>
         </div>
       </div>
 
       <div className="absolute solid-bg-parent w-[9rem] h-[9rem] top-[49.5rem] left-[63.375rem] z-20">
-        <div className="absolute flex justify-center items-center circle-button w-full h-full solid-bg top-0 left-0 z-0">
-        </div>
+        <div className="absolute flex justify-center items-center circle-button w-full h-full solid-bg top-0 left-0 z-0"></div>
         <div className="absolute flex justify-center items-center w-full h-full top-0 left-0 z-1">
-          <span className='circle-button-content'>Participate</span>
+          <span className="circle-button-content">Participate</span>
         </div>
       </div>
     </div>

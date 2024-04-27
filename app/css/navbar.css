@@ -22,6 +22,28 @@
   line-height: normal;
 }
 
+.move-above-vp {
+    transform: translateY(-50px);
+}
+
+@keyframes drop {
+    0% {
+        transform: translateY(-50px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.drop-animation {
+    animation-name: drop;
+    animation-duration: 400ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+
 @media (min-width: 1200px) {
   .menu-hamburger {
     display: none;

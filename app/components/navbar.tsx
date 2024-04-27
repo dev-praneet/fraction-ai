@@ -10,6 +10,8 @@ import Link from 'next/link';
 import '../css/navbar.css';
 import { Inter } from 'next/font/google';
 
+import { motion } from 'framer-motion';
+
 const inter = Inter({ subsets: ['latin'] });
 
 interface NavItem {
@@ -163,8 +165,23 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="px-[3.75rem] py-0 flex items-center h-[5rem]">
-        <div className="w-[31.3125rem]">
+      <motion.div
+        className="px-[3.75rem] py-0 flex items-center h-[5rem] add-border snap-start"
+        // initial={{ skewY: -5 }}
+        // animate={{ skewY: 0 }}
+        // transition={{
+        //   duration: 0.2,
+        //   delay: 0,
+        // }}
+      >
+        {/* <motion.div */}
+        <div
+          className="w-[31.3125rem] drop-animation"
+          //   initial={{ y: -40 }}
+          //   animate={{ y: 0 }}
+          //   transition={{ ease: 'easeOut', duration: 0.15, delay: 0 }}
+          //   style={{ transform: 'translateY(-40px)' }}
+        >
           <figure>
             <img
               alt="logo"
@@ -172,10 +189,11 @@ export default function Navbar() {
               decoding="async"
               data-nimg="1"
               src={FractionAiHeader.src}
-              className='text-transparent w-[10.3125rem] h-[1.625rem]'
+              className="text-transparent w-[10.3125rem] h-[1.625rem]"
             />
           </figure>
         </div>
+        {/* </motion.div> */}
 
         {/* <div className="pl-10  menu-hamburger" onClick={toggleMobileNav}>
           <img
@@ -211,27 +229,47 @@ export default function Navbar() {
         </div> */}
         <div className={`${inter.className} w-[29.875rem] list-none flex justify-between text-small3`}>
           {navItems.map((item, index) => (
-            <li key={index} className="">
+            // <motion.li
+            <li
+              key={index}
+              className="move-above-vp drop-animation"
+              //   initial={{ y: -40 }}
+              //   animate={{ y: 0 }}
+              //   transition={{ ease: 'easeOut', duration: 0.15, delay: (index + 1) * 0.05 }}
+              style={{ animationDelay: `${(index + 1) * 50}ms` }}
+            >
               <button>{item.label}</button>
             </li>
+            // </motion.li>
           ))}
         </div>
 
-        <div className="flex ml-auto">
+        {/* <motion.div */}
+        <div
+          className="flex ml-auto move-above-vp drop-animation"
+          //   initial={{ y: -40 }}
+          //   animate={{ y: 0 }}
+          //   transition={{ ease: 'easeOut', duration: 0.15, delay: (navItems.length + 1) * 0.050 }}
+          style={{ animationDelay: `${(navItems.length + 1) * 50}ms` }}
+        >
           <img
             alt="arrow"
             loading="lazy"
             decoding="async"
             data-nimg="1"
             src={loginArrowIcon.src}
-            className='text-transparent w-[1.25rem] h-[1.25rem]'
+            className="text-transparent w-[1.25rem] h-[1.25rem]"
           />
           <span className="px-2 text-login">Log In</span>
         </div>
-      </div>
+        {/* </motion.div> */}
+      </motion.div>
 
       {mobileDrawerOpen && (
-        <div className="absolute z-50 -mt-1 mobile-hamburger w-full backdrop-blur-2xl bg-purple-50" onClick={closeDropdown}>
+        <div
+          className="absolute z-50 -mt-1 mobile-hamburger w-full backdrop-blur-2xl bg-purple-50"
+          onClick={closeDropdown}
+        >
           <div className="bg-purple-50 text-small3 text-black rounded-b-xl" onClick={preventCloseDropdown}>
             <div className="w-full py-4 px-4 font-medium">
               {navItems.map((item, index) => {

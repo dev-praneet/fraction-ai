@@ -8,6 +8,8 @@ import SlowOrganisationIcon from '../../public/icons/SlowOrganisationIcon.svg';
 import SyndicateOrganisationIcon from '../../public/icons/SyndicateOrganisationIcon.svg';
 import OrganizationSliderTextBackground from '../../public/icons/OrganizationSliderTextBackground.svg';
 import '../css/organisationslider.css';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const OrganisationSlider = () => {
   const settings = {
@@ -86,10 +88,19 @@ const OrganisationSlider = () => {
     },
   ];
 
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ['start start', 'start end'],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0.2, 1], [1, 0.1]);
+  const translateY = useTransform(scrollYProgress, [0.4, 1], [0, 300]);
+
   return (
     <>
-      <div className="">
-        <div className="organisation-conatiner relative">
+      <div className="snap-start scroll-mt-20">
+        <motion.div ref={targetRef} className="organisation-conatiner relative" style={{ y: translateY, opacity }}>
           <div className="w-full flex justify-center">
             <div className="w-[68.5625rem] pt-[6rem] text-center organisation-slider-header">
               <span>Trusted by over 150 organizations</span>
@@ -120,7 +131,7 @@ const OrganisationSlider = () => {
               ))}
             </Slider>
           </div>
-        </div>
+        </motion.div>
       </div>
     </>
   );

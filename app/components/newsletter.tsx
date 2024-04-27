@@ -1,12 +1,21 @@
+'use client';
+
+import { useRef } from 'react';
 import NewsletterBackground from '../../public/icons/NewsletterBackground.svg';
 
 import '../css/faq.css';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Newsletter() {
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: targetRef });
+
+  const opacity = useTransform(scrollYProgress, [0.3, 1], [1, 0.1]);
+
   return (
     <>
-      <div>
-        <figure className="absolute bottom-[24.875rem] z-0">
+      <motion.div ref={targetRef} style={{ opacity }}>
+        <figure className="absolute bottom-[24.875rem] z-0 snap-start">
           <img src={NewsletterBackground.src} className="w-[100rem] h-[27.75rem]" />
         </figure>
 
@@ -34,7 +43,7 @@ export default function Newsletter() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

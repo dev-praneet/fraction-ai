@@ -7,6 +7,8 @@ import InvestorOneIcon from '../../../public/icons/InvestorOneIcon.svg';
 import InvestorTwoIcon from '../../../public/icons/InvestorTwoIcon.svg';
 import InvestorBackground from '../../../public/icons/InvestorBackground.svg';
 import '../../css/carousel.css';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const SimpleSlider = () => {
   const settings = {
@@ -84,6 +86,11 @@ const SimpleSlider = () => {
     InvestorOneIcon,
   ];
 
+  const investorsRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: investorsRef });
+  const opacity = useTransform(scrollYProgress, [0.7, 1], [1, 0.4]);
+  const translateY = useTransform(scrollYProgress, [0.7, 1], [0, 100]);
+
   return (
     <>
       {/* <div className=''>
@@ -114,24 +121,24 @@ const SimpleSlider = () => {
           </div>
         </div>
       </div> */}
-      <div className='relative'>
-        <figure className='absolute top-0 left-0'>
-          <img src={InvestorBackground.src} className="w-[100rem] h-[22.5625rem]"/>
+      <motion.div ref={investorsRef} className="relative z-10" style={{ y: translateY, opacity }} data-xyz>
+        <figure className="absolute top-0 left-0">
+          <img src={InvestorBackground.src} className="w-[100rem] h-[22.5625rem]" />
         </figure>
         <div className="relative px-[4rem]">
-            <div className='investor-logo-carousel'>
-              <div style={{ width: '100%'}}>
-                <Slider {...settings} className="">
-                  {images.map((image, index) => (
-                    <figure key={index}>
-                      <img src={image.src} alt={`Slide ${index}`} style={{ width: '6rem', height: '6rem' }} />
-                    </figure>
-                  ))}
-                </Slider>
-              </div>
+          <div className="investor-logo-carousel">
+            <div style={{ width: '100%' }}>
+              <Slider {...settings} className="">
+                {images.map((image, index) => (
+                  <figure key={index}>
+                    <img src={image.src} alt={`Slide ${index}`} style={{ width: '6rem', height: '6rem' }} />
+                  </figure>
+                ))}
+              </Slider>
             </div>
           </div>
-      </div>
+        </div>
+      </motion.div>
     </>
   );
 };

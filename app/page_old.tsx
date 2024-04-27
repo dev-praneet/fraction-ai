@@ -20,7 +20,7 @@ export default function Home() {
         <div style={{ paddingBottom: '20px' }}>
           <Navbar />
         </div>
-        <div className='frac-body'>
+        <div className="frac-body">
           <AnimationOne />
           <SimpleSlider />
           <PerpetualLabelled />

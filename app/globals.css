@@ -64,9 +64,19 @@
   font-style: italic;
 }
 
+html {
+  /* height: 100vh; */
+  /* overflow-y: scroll; */
+  /* scroll-snap-type: mandatory; */
+  /* scroll-snap-points-y: repeat(100vh); */
+  scroll-snap-type: both proximity;
+  /* border: 2px solid red; */
+}
+
 html,
 body {
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
+  /* overflow-y: scroll; */
 }
 
 body {
@@ -74,6 +84,13 @@ body {
   display: flex;
   justify-content: center;
 }
+
+/* .section-scroll {
+    height: 100vh;
+    margin-top: 10px;
+    border: 2px solid red;
+    scroll-snap-align: start;
+} */
 
 .global-bg {
   background: url('../public/icons/DesktopBg.svg') !important;
