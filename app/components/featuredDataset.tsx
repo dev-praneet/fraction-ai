@@ -6,7 +6,7 @@ import FeatureDatasetsIconThree from '../../public/icons/FeatureDatasetsIconThre
 import FeaaturedDatasetsEllipse from '../../public/icons/FeaaturedDatasetsEllipse.svg';
 import '../css/featureddatasets.css';
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 
 export default function FeatureDataset() {
   let FeatureDatasetIcons = [FeatureDatasetsIconOne, FeatureDatasetsIconTwo, FeatureDatasetsIconThree];
@@ -29,7 +29,8 @@ export default function FeatureDataset() {
   const circleTranslateY = useTransform(circleScrollYProgress, [0.6, 1], [0, 150]);
 
   const datasetOpacity = useTransform(datasetScrollYProgress, [0.5, 1], [1, 0.3]);
-  const datasetTranslateY = useTransform(datasetScrollYProgress, [0.6, 1], [0, 150]);
+  let datasetTranslateY = useTransform(datasetScrollYProgress, [0.6, 1], [0, 150]);
+  datasetTranslateY = useSpring(datasetTranslateY, { damping: 30 });
 
   return (
     <>

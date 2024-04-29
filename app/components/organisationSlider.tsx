@@ -9,7 +9,7 @@ import SyndicateOrganisationIcon from '../../public/icons/SyndicateOrganisationI
 import OrganizationSliderTextBackground from '../../public/icons/OrganizationSliderTextBackground.svg';
 import '../css/organisationslider.css';
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 
 const OrganisationSlider = () => {
   const settings = {
@@ -95,7 +95,8 @@ const OrganisationSlider = () => {
   });
 
   const opacity = useTransform(scrollYProgress, [0.2, 1], [1, 0.1]);
-  const translateY = useTransform(scrollYProgress, [0.4, 1], [0, 300]);
+  let translateY = useTransform(scrollYProgress, [0.4, 1], [0, 300]);
+  translateY = useSpring(translateY, { damping: 30 });
 
   return (
     <>

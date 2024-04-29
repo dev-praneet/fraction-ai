@@ -7,7 +7,8 @@ import SCurve from '../../public/icons/SCurve.svg';
 import PerpetualLabelledIconsBackground from '../../public/icons/PerpetualLabelledIconsBackground.svg';
 import '../css/perpetuallabelled.css';
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { useSpringScrollWithRef, useSpringScroll, useRegularScroll } from '../hooks/useScrollHooks';
 
 export default function PerpetualLabelled() {
   let labelledDatasetText: any = [
@@ -16,25 +17,73 @@ export default function PerpetualLabelled() {
     { Icon: CommunityOwnedLogo, Text: 'Community owned', subText: 'tokenized ownership for data licensing revenue' },
   ];
 
-  const perpetualLabelledHeaderRef = useRef(null);
-  const perpetualLabelledSubtextRef = useRef(null);
-  const proactiveModelRef = useRef(null);
+  //   const perpetualLabelledHeaderRef = useRef(null);
+  //   const { scrollYProgress: headerScrollYProgress } = useScroll({ target: perpetualLabelledHeaderRef });
+  //   const headerTranslateY = useTransform(headerScrollYProgress, [0.4, 1], [0, 100]);
+  //   const headerScaleY = useTransform(headerScrollYProgress, [0.4, 1], [1, 1.7]);
+  //   const headerOpacity = useTransform(headerScrollYProgress, [0.4, 1], [1, 0]);
 
-  const { scrollYProgress: headerScrollYProgress } = useScroll({ target: perpetualLabelledHeaderRef });
-  const { scrollYProgress: subtextScrollYProgress } = useScroll({ target: perpetualLabelledSubtextRef });
-  const { scrollYProgress: proactiveScrollYProgress } = useScroll({ target: perpetualLabelledSubtextRef });
+  const [perpetualLabelledHeaderRef, headerTranslateY] = useSpringScrollWithRef({
+    inputRange: [0.4, 1],
+    outputRange: [0, 100],
+  });
+  const headerScaleY = useSpringScroll({
+    ref: perpetualLabelledHeaderRef,
+    inputRange: [0.4, 1],
+    outputRange: [1, 1.7],
+  });
+  const headerOpacity = useRegularScroll({
+    ref: perpetualLabelledHeaderRef,
+    inputRange: [0.4, 1],
+    outputRange: [1, 0],
+  });
 
-  const headerOpacity = useTransform(headerScrollYProgress, [0.4, 1], [1, 0]);
-  const headerTranslateY = useTransform(subtextScrollYProgress, [0.4, 1], [0, 100]);
-  const headerScaleY = useTransform(subtextScrollYProgress, [0.4, 1], [1, 1.7]);
+  //   const perpetualLabelledSubtextRef = useRef(null);
+  //   const { scrollYProgress: subtextScrollYProgress } = useScroll({ target: perpetualLabelledSubtextRef });
+  //   const subtextTranslateY = useTransform(subtextScrollYProgress, [0.4, 1], [0, 150]);
+  //   const subtextScaleY = useTransform(subtextScrollYProgress, [0.5, 1], [1, 1.7]);
+  //   const subtextOpacity = useTransform(headerScrollYProgress, [0.4, 1], [1, 0]);
 
-  const subtextOpacity = useTransform(headerScrollYProgress, [0.4, 1], [1, 0]);
-  const subtextTranslateY = useTransform(subtextScrollYProgress, [0.4, 1], [0, 150]);
-  const subtextScaleY = useTransform(subtextScrollYProgress, [0.5, 1], [1, 1.7]);
+  const [perpetualLabelledSubtextRef, subtextTranslateY] = useSpringScrollWithRef({
+    inputRange: [0.4, 1],
+    outputRange: [0, 150],
+  });
+  const subtextScaleY = useSpringScroll({
+    ref: perpetualLabelledSubtextRef,
+    inputRange: [0.5, 1],
+    outputRange: [1, 1.7],
+  });
+  const subtextOpacity = useRegularScroll({
+    ref: perpetualLabelledSubtextRef,
+    inputRange: [0.4, 1],
+    outputRange: [1, 0],
+  });
 
-  const procativeOpacity = useTransform(proactiveScrollYProgress, [0.4, 1], [1, 0]);
-  const proactiveTranslateY = useTransform(proactiveScrollYProgress, [0.4, 1], [0, 150]);
-  const proactiveScaleY = useTransform(proactiveScrollYProgress, [0.5, 1], [1, 1.7]);
+  //   const proactiveModelRef = useRef(null);
+  //   const { scrollYProgress: proactiveScrollYProgress } = useScroll({ target: proactiveModelRef });
+  //   const proactiveOpacity = useTransform(proactiveScrollYProgress, [0.4, 1], [1, 0]);
+
+  //   let proactiveTranslateY = useTransform(proactiveScrollYProgress, [0.4, 1], [0, 150]);
+  //   proactiveTranslateY = useSpring(proactiveTranslateY, {
+  //     stiffness: 100,
+  //     damping: 30,
+  //     restDelta: 0.001,
+  //   });
+  //   const proactiveScaleY = useTransform(proactiveScrollYProgress, [0.5, 1], [1, 1.7]);
+  const [proactiveModelRef, proactiveTranslateY] = useSpringScrollWithRef({
+    inputRange: [0.4, 1],
+    outputRange: [0, 150],
+  });
+  const proactiveOpacity = useRegularScroll({
+    ref: proactiveModelRef,
+    inputRange: [0.4, 1],
+    outputRange: [1, 0],
+  });
+  const proactiveScaleY = useSpringScroll({
+    ref: proactiveModelRef,
+    inputRange: [0.5, 1],
+    outputRange: [1, 1.7],
+  });
 
   return (
     <>
@@ -75,8 +124,17 @@ export default function PerpetualLabelled() {
 
           <motion.div
             ref={proactiveModelRef}
+            // initial={{ y: 150 }}
+            // whileInView={{ y: 0, marginTop: 100 }}
+            // transition={{ duration: 1 }}
+            // viewport={{ margin: '-100px' }}
             className="pt-[3.75rem] pl-[7.375rem]"
-            style={{ y: proactiveTranslateY, opacity: procativeOpacity, scaleY: proactiveScaleY }}
+            style={{
+              y: proactiveTranslateY,
+              opacity: proactiveOpacity,
+              scaleY: proactiveScaleY,
+              transformOrigin: 'center top',
+            }}
           >
             <div>
               <span className="perpetual-labelled-icon-list-header">

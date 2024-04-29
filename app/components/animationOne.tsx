@@ -13,6 +13,7 @@ import Image from 'next/image';
 import { Inter } from 'next/font/google';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRegularScroll, useSpringScroll, useSpringScrollWithRef } from '../hooks/useScrollHooks';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -52,34 +53,33 @@ const AnimationOne = () => {
   //   };
   // }, []);
 
-  const problemNodeRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: problemNodeRef,
+  //   const problemNodeRef = useRef(null);
+  //   const { scrollYProgress } = useScroll({
+  //     target: problemNodeRef,
+  //   });
+  //   const problemNodeScaleY = useTransform(scrollYProgress, [0.4, 1], [1, 1.4]);
+  //   const problemNodeOpacity = useTransform(scrollYProgress, [0.4, 1], [1, 0]);
+  //   const problemNodeTranslateY = useTransform(scrollYProgress, [0.2, 1], [0, 100]);
+  const [problemNodeRef, problemNodeScaleY] = useSpringScrollWithRef({ inputRange: [0.4, 1], outputRange: [1, 1.7] });
+  const problemNodeOpacity = useRegularScroll({ ref: problemNodeRef, inputRange: [0.3, 1], outputRange: [1, 0] });
+  const problemNodeTranslateY = useSpringScroll({ ref: problemNodeRef, inputRange: [0.3, 1], outputRange: [0, 400] });
+
+  //   const solutionsNode = useRef(null);
+  //   const { scrollYProgress: solutionsNodeScrollYProgress } = useScroll({
+  //     target: solutionsNode,
+  //   });
+  //   const solutionsNodeOpacity = useTransform(solutionsNodeScrollYProgress, [0.4, 1], [1, 0]);
+  //   const solutionsNodeTranslateY = useTransform(solutionsNodeScrollYProgress, [0.2, 1], [0, 100]);
+  const [solutionsNode, solutionsNodeTranslateY] = useSpringScrollWithRef({
+    inputRange: [0.2, 1],
+    outputRange: [0, 300],
   });
-
-  const problemNodeScaleY = useTransform(scrollYProgress, [0.4, 1], [1, 1.4]);
-  const problemNodeOpacity = useTransform(scrollYProgress, [0.4, 1], [1, 0]);
-  const problemNodeTranslateY = useTransform(scrollYProgress, [0.2, 1], [0, 100]);
-
-  const solutionsNode = useRef(null);
-  const { scrollYProgress: solutionsNodeScrollYProgress } = useScroll({
-    target: solutionsNode,
-  });
-  const solutionsNodeOpacity = useTransform(solutionsNodeScrollYProgress, [0.4, 1], [1, 0]);
-  const solutionsNodeTranslateY = useTransform(solutionsNodeScrollYProgress, [0.2, 1], [0, 100]);
-
-  //   console.log('problem node translateY value', problemNodeTranslateY);
-  //   console.log('problem node opacity value', problemNodeOpacity);
+  const solutionsNodeOpacity = useRegularScroll({ ref: solutionsNode, inputRange: [0.4, 1], outputRange: [1, 0] });
 
   return (
     <>
       <div className="flex justify-between pt-[3.375rem] pb-[5.375rem] pl-[20rem] pr-[24rem]">
-        <motion.div
-          className="flex items-center hero-banner-text animate-text"
-          //   initial={{ y: 150, scaleY: 1.3, opacity: 0 }}
-          //   animate={{ y: 0, scaleY: 1, opacity: 1 }}
-          //   transition={{ ease: 'easeOut', duration: 0.4 }}
-        >
+        <motion.div className="flex items-center hero-banner-text animate-text">
           <span>
             Perpetual <br /> Datasets for AI
           </span>
@@ -87,23 +87,13 @@ const AnimationOne = () => {
 
         <div className={inter.className}>
           <div className="flex text-[1.125rem] gap-[1.25rem]">
-            <motion.div
-              className="relative solid-bg-parent w-[9rem] h-[9rem] animate-circle"
-              //   initial={{ scale: 0 }}
-              //   animate={{ scale: 1 }}
-              //   transition={{ ease: 'easeOut', duration: 0.4 }}
-            >
+            <motion.div className="relative solid-bg-parent w-[9rem] h-[9rem] animate-circle">
               <div className="absolute flex justify-center items-center circle-button w-full h-full solid-bg top-0 left-0 z-0"></div>
               <div className="absolute flex justify-center items-center w-full h-full top-0 left-0 z-1">
                 <span className="circle-button-content">Contribute</span>
               </div>
             </motion.div>
-            <motion.div
-              className="relative transparent-bg-parent w-[7.1875rem] h-[9rem] animate-circle"
-              //   initial={{ scale: 0 }}
-              //   animate={{ scale: 1 }}
-              //   transition={{ ease: 'easeOut', duration: 0.4 }}
-            >
+            <motion.div className="relative transparent-bg-parent w-[7.1875rem] h-[9rem] animate-circle">
               <div className="absolute flex justify-center items-center w-full h-full circle-button transparent-bg top-0 left-0 z-0"></div>
               <div className="absolute flex justify-center items-center w-full h-full top-0 left-0 z-1">
                 <span className="circle-button-content">Stake</span>
@@ -114,12 +104,7 @@ const AnimationOne = () => {
       </div>
 
       <div className="relative">
-        <motion.div
-          className="ml-[10.9375rem] mr-[15.9375rem] animate-image"
-          //   initial={{ y: 150 }}
-          //   animate={{ y: 0 }}
-          //   transition={{ ease: 'easeOut', duration: 0.4 }}
-        >
+        <motion.div className="ml-[10.9375rem] mr-[15.9375rem] animate-image">
           <div className="relative w-full h-[87.5rem]">
             <Image className="" src={HeroImage} alt="Fraction" fill={true} priority={true} />
           </div>
@@ -131,8 +116,8 @@ const AnimationOne = () => {
           style={{
             scaleY: problemNodeScaleY,
             opacity: problemNodeOpacity,
-            // transform: `translateY(${problemNodeTranslateY}px)`,
             y: problemNodeTranslateY,
+            transformOrigin: 'center top',
           }}
         >
           <div className="w-[27%]">

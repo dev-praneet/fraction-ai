@@ -6,7 +6,7 @@ import collapseDropdownIcon from '../../public/icons/collapseDropdownIcon.svg';
 
 import '../css/faq.css';
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 
 const dataItems: IFAQItem[] = [
   {
@@ -62,7 +62,8 @@ export default function FAQ() {
   const textTranslateY = useTransform(textScrollYProgress, [0.3, 1], [0, 200]);
 
   const contentOpacity = useTransform(contentScrollYProgress, [0.2, 1], [1, 0.1]);
-  const contentTranslateY = useTransform(contentScrollYProgress, [0.2, 1], [0, 350]);
+  let contentTranslateY = useTransform(contentScrollYProgress, [0.2, 1], [0, 350]);
+  contentTranslateY = useSpring(contentTranslateY, { damping: 30 });
   const contentScaleY = useTransform(contentScrollYProgress, [0.3, 1], [1, 1.4]);
 
   return (

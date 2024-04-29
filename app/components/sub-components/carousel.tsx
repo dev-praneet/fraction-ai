@@ -8,7 +8,8 @@ import InvestorTwoIcon from '../../../public/icons/InvestorTwoIcon.svg';
 import InvestorBackground from '../../../public/icons/InvestorBackground.svg';
 import '../../css/carousel.css';
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { useRegularScroll, useSpringScrollWithRef } from '@/app/hooks/useScrollHooks';
 
 const SimpleSlider = () => {
   const settings = {
@@ -89,7 +90,18 @@ const SimpleSlider = () => {
   const investorsRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: investorsRef });
   const opacity = useTransform(scrollYProgress, [0.7, 1], [1, 0.4]);
-  const translateY = useTransform(scrollYProgress, [0.7, 1], [0, 100]);
+  let translateY = useTransform(scrollYProgress, [0.9, 1], [0, 100]);
+  translateY = useSpring(translateY, { damping: 30 });
+
+  //   const [investorsRef, translateY] = useSpringScrollWithRef({
+  //     inputRange: [0.7, 1],
+  //     outputRange: [0, 200],
+  //   });
+  //   const opacity = useRegularScroll({
+  //     ref: investorsRef,
+  //     inputRange: [0.7, 1],
+  //     outputRange: [1, 0.4],
+  //   });
 
   return (
     <>

@@ -8,28 +8,51 @@ import FracIcon from '../../public/icons/FracIcon.svg';
 import ParticipateBackground from '../../public/icons/ParticipateBackground.svg';
 import '../css/novelprotocol.css';
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { useRegularScroll, useSpringScroll, useSpringScrollWithRef } from '../hooks/useScrollHooks';
 
 export default function NovelProtocol() {
   const figureRef = useRef(null);
-  const textRef = useRef(null);
-
   const { scrollYProgress: figureScrollYProgress } = useScroll({
     target: figureRef,
     offset: ['start start', 'start end'],
   });
+  let figureTranslateY = useTransform(figureScrollYProgress, [0.2, 1], [0, 350]);
+  figureTranslateY = useSpring(figureTranslateY, { damping: 30 });
+  const figureScaleY = useTransform(figureScrollYProgress, [0.2, 1], [1, 2]);
+
+  //   const [figureRef, figureTranslateY] = useSpringScrollWithRef({
+  //     inputRange: [0.2, 1],
+  //     outputRange: [0, 250],
+  //     offset: ['start start', 'start end'],
+  //   });
+  //   const figureScaleY = useSpringScroll({
+  //     ref: figureRef,
+  //     inputRange: [0.2, 1],
+  //     outputRange: [0, 250],
+  //     offset: ['start start', 'start end'],
+  //   });
+
+  const textRef = useRef(null);
   const { scrollYProgress: textScrollYProgress } = useScroll({
     target: textRef,
     offset: ['start start', 'end end'],
   });
-
-  const figureScaleY = useTransform(figureScrollYProgress, [0.2, 1], [1, 2]);
-  //   const figureOpacity = useTransform(figureScrollYProgress, [0.4, 1], [1, 0]);
-  const figureTranslateY = useTransform(figureScrollYProgress, [0.2, 1], [0, 250]);
-
-  //   const textScaleY = useTransform(textScrollYProgress, [0.5, 1], [1, 1.2]);
+  let textTranslateY = useTransform(textScrollYProgress, [0.3, 0.7], [0, 50]);
+  textTranslateY = useSpring(textTranslateY);
   const textOpacity = useTransform(textScrollYProgress, [0.3, 0.7], [1, 0]);
-  const textTranslateY = useTransform(textScrollYProgress, [0.3, 0.7], [0, 50]);
+
+  //   const [textRef, textTranslateY] = useSpringScrollWithRef({
+  //     inputRange: [0.3, 0.7],
+  //     outputRange: [0, 50],
+  //     offset: ['start start', 'end end'],
+  //   });
+  //   const textOpacity = useRegularScroll({
+  //     ref: textRef,
+  //     inputRange: [0.3, 0.7],
+  //     outputRange: [1, 0],
+  //     offset: ['start start', 'end end'],
+  //   });
 
   return (
     // <div className="protocol-content protocol-main-conatiner relative novel-protocol-screen-padding">

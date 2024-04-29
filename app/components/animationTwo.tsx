@@ -5,7 +5,7 @@ import Content from '../../public/icons/Content.svg';
 import '../css/animationtwo.css';
 import '../css/animationone.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 
 const AnimationTwo = () => {
   const [renderComplete, setRenderComplete] = useState<boolean>(false);
@@ -15,9 +15,10 @@ const AnimationTwo = () => {
     target: textWrapperRef,
   });
 
-  const scaleY = useTransform(scrollYProgress, [0.4, 1], [1, 1.2]);
+  //   const scaleY = useTransform(scrollYProgress, [0.4, 1], [1, 1.2]);
   const opacity = useTransform(scrollYProgress, [0.2, 1], [1, 0]);
-  const translateY = useTransform(scrollYProgress, [0.3, 1], [0, 200]);
+  let translateY = useTransform(scrollYProgress, [0.3, 1], [0, 200]);
+  translateY = useSpring(translateY, { damping: 30 });
 
   useEffect(() => {
     if (renderComplete) {

@@ -12,7 +12,7 @@ import BlockQuote from '../../public/icons/BlockQuote.svg';
 
 import '../css/testimonial.css';
 import { useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 
 export default function Testimonials() {
   const sliderRef = useRef<Slider>(null);
@@ -66,7 +66,8 @@ export default function Testimonials() {
 
   const sliderScaleY = useTransform(sliderScrollYProgress, [0.4, 1], [1, 1.2]);
   const sliderOpacity = useTransform(sliderScrollYProgress, [0.4, 1], [1, 0]);
-  const sliderTranslateY = useTransform(sliderScrollYProgress, [0.4, 1], [0, 200]);
+  let sliderTranslateY = useTransform(sliderScrollYProgress, [0.4, 1], [0, 200]);
+  sliderTranslateY = useSpring(sliderTranslateY, { damping: 30 });
 
   const handleAfterChange = (currentSlide: number) => {
     setCurrentSlide(currentSlide);

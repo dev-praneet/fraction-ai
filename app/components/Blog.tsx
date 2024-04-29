@@ -9,7 +9,7 @@ import BlogLeftCurve from '../../public/icons/BlogLeftCurve.svg';
 import BlogRightCurve from '../../public/icons/BlogRightCurve.svg';
 import '../css/blog.css';
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 
 export default function Blog() {
   let BlogIcons = [
@@ -49,7 +49,8 @@ export default function Blog() {
   const circleTranslateY = useTransform(circleScrollYProgress, [0.6, 1], [0, 250]);
 
   const datasetOpacity = useTransform(datasetScrollYProgress, [0.5, 1], [1, 0.3]);
-  const datasetTranslateY = useTransform(datasetScrollYProgress, [0.6, 1], [0, 150]);
+  let datasetTranslateY = useTransform(datasetScrollYProgress, [0.6, 1], [0, 150]);
+  datasetTranslateY = useSpring(datasetTranslateY, { damping: 30 });
 
   return (
     <>
